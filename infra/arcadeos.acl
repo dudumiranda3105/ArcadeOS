@@ -1,0 +1,5 @@
+user arcade-device
+topic write arcadeos/arcade-01/telemetry
+
+user arcade-backend
+topic read arcadeos/arcade-01/telemetry

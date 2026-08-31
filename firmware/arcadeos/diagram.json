@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "author": "ArcadeOS",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -20, "left": 190, "attrs": { "temperature": "28", "humidity": "47" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 105, "left": 135, "attrs": { "value": "10000" } }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "dht:VCC", "esp:3V3", "red", [] ],
+    [ "dht:GND", "esp:GND.1", "black", [] ],
+    [ "dht:SDA", "esp:D4", "green", [] ],
+    [ "r1:1", "esp:3V3", "red", [] ],
+    [ "r1:2", "dht:SDA", "green", [] ]
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,23 @@
+# Alternativa opcional. Docker não é requisito para rodar a primeira entrega.
+services:
+  mosquitto:
+    image: eclipse-mosquitto:2.0.22
+    ports:
+      - "127.0.0.1:1883:1883"
+    volumes:
+      - ./mosquitto-docker.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-data:/mosquitto/data
+    restart: unless-stopped
+  influxdb:
+    image: influxdb:2.7.12
+    ports:
+      - "127.0.0.1:8086:8086"
+    volumes:
+      - influx-data:/var/lib/influxdb2
+      - influx-config:/etc/influxdb2
+    restart: unless-stopped
+
+volumes:
+  mosquitto-data:
+  influx-data:
+  influx-config:

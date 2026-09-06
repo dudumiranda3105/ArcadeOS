@@ -15,7 +15,6 @@ WiFiClient network;
 PubSubClient mqtt(network);
 unsigned long lastReading = 0;
 unsigned long lastAttempt = 0;
-String topic = String("arcadeos/") + DEVICE_ID + "/telemetry";
 String clientId;
 
 void setup() {
@@ -72,7 +71,7 @@ void loop() {
       "{\"device_id\":\"%s\",\"temperature\":%.1f,\"humidity\":%.1f,\"source\":\"%s\"}",
       DEVICE_ID, temperature, humidity, TELEMETRY_SOURCE);
     // PubSubClient publica em QoS 0. retain=false evita marcar leituras antigas como novas.
-    bool sent = mqtt.publish(topic.c_str(), payload, false);
+    bool sent = mqtt.publish(MQTT_TOPIC, payload, false);
     digitalWrite(2, sent ? HIGH : LOW);
     Serial.printf("%s %s\n", sent ? "Enviado:" : "Falha ao enviar:", payload);
   }

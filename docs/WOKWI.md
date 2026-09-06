@@ -5,7 +5,7 @@
 1. Crie um projeto ESP32 em [wokwi.com](https://wokwi.com/).
 2. Copie `firmware/arcadeos/arcadeos.ino` para o `sketch.ino` do projeto.
 3. Adicione `config.h`, `libraries.txt` e o conteúdo de `diagram.json`.
-4. Configure o endereço MQTT seguindo um dos caminhos abaixo.
+4. O código já está configurado para o caminho público abaixo; altere somente se optar pelo gateway privado ou broker próprio.
 5. Inicie a simulação e abra o monitor serial.
 6. Clique no DHT22 e altere temperatura/umidade. Uma leitura deve sair a cada 5 segundos.
 
@@ -17,9 +17,15 @@
 
 O circuito inclui um resistor de 10k entre DATA e 3V3. O LED integrado no GPIO2 indica a tentativa bem-sucedida de publicação MQTT; não comprova a gravação no banco. Confira também o log do Python e o InfluxDB.
 
-## Caminho A: gateway privado e broker local
+## Caminho recomendado para a apresentação: Mosquitto público
 
-O firmware vem com `MQTT_HOST = host.wokwi.internal`, porta 1883, sem TLS e sem senha. Isso é exclusivo do ambiente local de desenvolvimento.
+O firmware usa `test.mosquitto.org:1883` e o tópico `arcadeos/a9f4c2d1/telemetry`. No `backend/.env`, configure os mesmos valores em `MQTT_HOST`, `MQTT_PORT` e `MQTT_TOPIC`, depois reinicie o backend.
+
+Esse broker é público, compartilhado e não oferece garantia de disponibilidade. Publique apenas temperatura e umidade simuladas, não use senhas nem informações pessoais e mantenha `retain=false`. O sufixo reduz colisões, mas não fornece privacidade. Faça um ensaio na mesma rede da apresentação e tenha o gateway privado como alternativa se disponível.
+
+## Caminho alternativo A: gateway privado e broker local
+
+Altere o firmware para `MQTT_HOST = host.wokwi.internal`, `MQTT_PORT = 1883`, sem TLS e sem senha. Isso é exclusivo do ambiente local de desenvolvimento.
 
 1. Inicie o Mosquitto com `infra/mosquitto.conf`.
 2. Execute e habilite o **Private Wokwi IoT Gateway** conforme a documentação oficial.
@@ -29,7 +35,7 @@ O firmware vem com `MQTT_HOST = host.wokwi.internal`, porta 1883, sem TLS e sem 
 
 O gateway público não tem acesso a `localhost`, `127.0.0.1` ou serviços da sua rede local. Trocar apenas o endereço do firmware por seu IP local não resolve essa restrição.
 
-## Caminho B: Mosquitto remoto protegido
+## Caminho alternativo B: Mosquitto remoto protegido
 
 Pode ser usado com o gateway público. Você precisa de um servidor autorizado pelo grupo/professor com acesso TCP ao Mosquitto.
 

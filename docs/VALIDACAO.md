@@ -20,11 +20,21 @@ Verificação em 31/08/2026, Windows, Python 3.12, Node 24.
 
 Os testes de integração usam `source: mqtt-simulator`. São mensagens MQTT reais de um publicador Python, **não dados de um ESP32**.
 
-## Preparado, mas ainda depende de validação externa
+## Firmware e configuração Wokwi em 06/09/2026
+
+- Circuito montado na interface do Wokwi com ESP32 DevKit, DHT22 no GPIO4 e resistor de 10k.
+- Bibliotecas adicionadas no Library Manager: DHT sensor library 1.4.6, Adafruit Unified Sensor 1.1.15 e PubSubClient 2.8.
+- Código configurado para `Wokwi-GUEST`, `test.mosquitto.org:1883` e tópico `arcadeos/a9f4c2d1/telemetry`.
+- Backend conectado ao mesmo broker/tópico; InfluxDB e API locais disponíveis.
+- Compilação local do mesmo firmware aprovada pelo PlatformIO: ESP32 Arduino, 44.768 bytes de RAM (13,7%) e 732.709 bytes de flash (55,9%).
+- Build final criado com sucesso; `.pio/` está fora do Git.
+
+## Ainda depende de validação externa
 
 - Firmware ESP32, `diagram.json`, bibliotecas e instruções completos em `firmware/arcadeos/` e `docs/WOKWI.md`.
-- A compilação do firmware no Wokwi/Arduino ainda não foi executada neste ambiente.
-- O circuito não foi iniciado no Wokwi: é necessário configurar gateway privado ou um broker Mosquitto remoto protegido e salvar o projeto na conta do grupo.
+- Duas tentativas de compilação online foram feitas. Os servidores gratuitos do Wokwi retornaram “Build Servers Busy”; a validação de compilação foi concluída localmente.
+- O circuito configurado está aberto no Wokwi, mas precisa de login para ser salvo na conta do grupo.
+- A leitura originada pelo próprio Wokwi ainda não chegou ao banco porque a simulação online não iniciou durante a indisponibilidade dos servidores.
 - TLS remoto e caminho do gateway privado não foram testados; a integração validada usa loopback local.
 - ESP32 físico não conectado nem testado.
 - GitHub: publicação ainda não realizada; depende da conta/repositório do grupo.

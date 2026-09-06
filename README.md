@@ -143,7 +143,7 @@ Abra [o ArcadeOS](http://127.0.0.1:5173) e selecione **Conexão IoT**. O Vite en
 
 Siga [docs/WOKWI.md](docs/WOKWI.md). Os arquivos completos estão em `firmware/arcadeos/`.
 
-O caminho de rede precisa ser escolhido: o gateway público do Wokwi não acessa o Mosquitto local. Use **Private Wokwi IoT Gateway** ou um **Mosquitto remoto protegido por TLS e credenciais temporárias**. Não é necessário substituir Mosquitto por outro serviço.
+O firmware de demonstração usa `test.mosquitto.org`, uma instância pública do Mosquitto, e um tópico exclusivo sem dados pessoais. Configure no `backend/.env`: `MQTT_HOST=test.mosquitto.org`, `MQTT_PORT=1883` e `MQTT_TOPIC=arcadeos/a9f4c2d1/telemetry`. Como alternativa, use **Private Wokwi IoT Gateway** para acessar o Mosquitto local ou um broker remoto próprio protegido por TLS.
 
 ### 6. Teste auxiliar antes do ESP32
 
@@ -175,7 +175,7 @@ Docker é uma conveniência opcional, não um requisito adicional desta entrega.
 
 ## Contrato de telemetria
 
-Tópico: `arcadeos/arcade-01/telemetry`.
+Tópico padrão local: `arcadeos/arcade-01/telemetry`. A demonstração Wokwi usa `arcadeos/a9f4c2d1/telemetry` para reduzir colisões no broker compartilhado.
 
 ```json
 {
@@ -214,6 +214,14 @@ pnpm build
 ```
 
 Os testes automatizados usam um repositório falso para verificar regras e respostas da API. Não substituem o teste real de MQTT, InfluxDB ou hardware. Consulte [docs/VALIDACAO.md](docs/VALIDACAO.md) para saber exatamente o que foi executado neste ambiente.
+
+O firmware também pode ser compilado localmente com [PlatformIO Core](https://docs.platformio.org/en/latest/core/installation/index.html):
+
+```powershell
+pio run
+```
+
+O arquivo `platformio.ini` fixa placa, framework e versões das bibliotecas. A saída de compilação em `.pio/` não é versionada.
 
 ## Git e GitHub
 

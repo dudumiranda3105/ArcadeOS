@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     mqtt_tls: bool = False
     mqtt_ca_cert: str = ""
     mqtt_client_id: str = "arcadeos-backend"
+    mqtt_topic: str = Field(default="", max_length=160, pattern=r"^[A-Za-z0-9_/-]*$")
     influx_url: str = "http://127.0.0.1:8086"
     influx_token: str = ""
     influx_org: str = "arcadeos"
@@ -38,7 +39,7 @@ class Settings(BaseSettings):
 
     @property
     def topic(self) -> str:
-        return f"arcadeos/{self.device_id}/telemetry"
+        return self.mqtt_topic or f"arcadeos/{self.device_id}/telemetry"
 
     def public_device(self) -> dict:
         return {

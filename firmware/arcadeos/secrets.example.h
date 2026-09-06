@@ -6,6 +6,7 @@
 #define MQTT_USERNAME "arcade-device"
 #define MQTT_PASSWORD "substitua-por-uma-senha-temporaria"
 #define MQTT_USE_TLS 1
+#define MQTT_TOPIC "arcadeos/seu-topico-exclusivo/telemetry"
 // Cole o certificado PEM real da autoridade certificadora do seu broker.
 #define MQTT_ROOT_CA "-----BEGIN CERTIFICATE-----\nSUBSTITUA\n-----END CERTIFICATE-----\n"
 

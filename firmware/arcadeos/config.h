@@ -13,8 +13,8 @@
 #define WIFI_PASSWORD ""
 #endif
 #ifndef MQTT_HOST
-// Funciona somente com o Private Wokwi IoT Gateway ativo.
-#define MQTT_HOST "host.wokwi.internal"
+// Broker Mosquitto público apenas para a apresentação com dados não sensíveis.
+#define MQTT_HOST "test.mosquitto.org"
 #endif
 #ifndef MQTT_PORT
 #define MQTT_PORT 1883
@@ -30,6 +30,10 @@
 #endif
 #ifndef DEVICE_ID
 #define DEVICE_ID "arcade-01"
+#endif
+#ifndef MQTT_TOPIC
+// Sufixo aleatório reduz colisões no broker compartilhado; não é um segredo.
+#define MQTT_TOPIC "arcadeos/a9f4c2d1/telemetry"
 #endif
 #ifndef TELEMETRY_SOURCE
 #define TELEMETRY_SOURCE "esp32-wokwi"

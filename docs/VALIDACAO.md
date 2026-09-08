@@ -46,7 +46,7 @@ Os testes de integração usam `source: mqtt-simulator`. São mensagens MQTT rea
 - O projeto do site não foi salvo na conta; a versão funcional está na pasta local para uso no VS Code.
 - TLS remoto e caminho do gateway privado não foram testados; a simulação validada usa o broker público.
 - ESP32 físico não conectado nem testado.
-- GitHub: publicação ainda não realizada; depende da conta/repositório do grupo.
+- GitHub: publicado em 08/09/2026 em `https://github.com/dudumiranda3105/ArcadeOS`, branch `main`. Envio confirmado comparando o SHA local com o remoto.
 - Docker Compose fornecido como alternativa, mas não executado; Docker Desktop não está instalado neste ambiente.
 - Dashboard inspecionado no navegador com leitura do Wokwi e estado crítico; ainda não foi realizada uma bateria completa de testes em desktop/celular.
 

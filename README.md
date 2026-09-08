@@ -1,5 +1,7 @@
 # ArcadeOS
 
+Repositório: [dudumiranda3105/ArcadeOS](https://github.com/dudumiranda3105/ArcadeOS).
+
 **Keep the game alive.** Plataforma Web IoT para acompanhar temperatura, umidade e disponibilidade de um gabinete de fliperama.
 
 Projeto do **1º bimestre — apresentação em 28/09**. O nome é a identidade do produto: trata-se de uma aplicação Web, não de um sistema operacional.
@@ -20,7 +22,7 @@ O sensor mede o **ar dentro do gabinete**, não CPU/GPU. Os limites de 35 °C e 
 | Comunicação | MQTT 3.1.1 + Eclipse Mosquitto |
 | Dispositivo | ESP32 + DHT22, físico ou no Wokwi |
 | Histórico | InfluxDB OSS **2.x**, com Flux |
-| Versionamento | Git; publicação no GitHub pelo grupo |
+| Versionamento | Git + GitHub |
 
 Node.js é usado **somente nas ferramentas do frontend**. O backend é Python. InfluxDB 3 não é uma substituição direta: este projeto usa a API e a linguagem Flux do InfluxDB 2.
 

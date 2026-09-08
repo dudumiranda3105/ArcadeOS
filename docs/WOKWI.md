@@ -1,5 +1,18 @@
 # ESP32 no Wokwi
 
+## Usar no VS Code
+
+Abra a pasta raiz `ArcadeOS` no VS Code. O arquivo `wokwi.toml` aponta para o firmware compilado pelo ambiente `esp32dev` do `platformio.ini`; o `diagram.json` da raiz contém o circuito ESP32 + DHT22.
+
+1. Instale a extensão oficial **Wokwi Simulator** (`Wokwi.wokwi-vscode`).
+2. Pressione F1 e execute **Wokwi: Request a new License**. A ativação ocorre no navegador; pode ser o Brave. Conclua a ativação pessoalmente e permita retornar ao VS Code. O uso depende de uma licença válida conforme as condições do Wokwi.
+3. Execute **Wokwi: Start Simulator** pela paleta F1.
+4. Inicie os serviços do ArcadeOS e selecione **Conexão IoT** no dashboard. Confirme uma leitura com origem `esp32-wokwi`; apenas compilar o firmware não valida o fluxo completo.
+
+Os binários locais já foram compilados nesta máquina, mas `.pio` não é versionado. Em outra máquina, ou após alterar o código, compile novamente com PlatformIO (`pio run -e esp32dev`), preferencialmente em um ambiente separado do Python do backend. Se editar o circuito, mantenha os dois arquivos `diagram.json` sincronizados.
+
+Documentação: [instalação e licença](https://docs.wokwi.com/vscode/getting-started) e [configuração do projeto](https://docs.wokwi.com/vscode/project-config).
+
 ## Criar o circuito
 
 1. Crie um projeto ESP32 em [wokwi.com](https://wokwi.com/).

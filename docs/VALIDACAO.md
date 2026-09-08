@@ -29,17 +29,26 @@ Os testes de integração usam `source: mqtt-simulator`. São mensagens MQTT rea
 - Compilação local do mesmo firmware aprovada pelo PlatformIO: ESP32 Arduino, 44.768 bytes de RAM (13,7%) e 732.709 bytes de flash (55,9%).
 - Build final criado com sucesso; `.pio/` está fora do Git.
 
+## Fluxo completo validado no Wokwi para VS Code em 06/09/2026
+
+- Extensão oficial Wokwi 3.7.0 instalada e licença ativada pelo usuário.
+- Simulação executada usando `wokwi.toml`, `diagram.json` e firmware compilado localmente.
+- Monitor serial confirmou conexão MQTT e publicação com origem `esp32-wokwi`.
+- Leituras de 28 °C e 47% chegaram ao Python e ao InfluxDB, sem falhas de escrita.
+- Temperatura alterada no DHT22 para 46,9 °C: API e dashboard em **Conexão IoT** mostraram estado crítico, sensor online e pico de 46,9 °C.
+- Histórico de 1h confirmou a sequência de 28 °C para 46,9 °C persistida com origem `esp32-wokwi`.
+- Fluxo: ESP32 simulado → MQTT → Mosquitto público (`test.mosquitto.org`) → Python local → InfluxDB local → Vue. O broker público é compartilhado e sem garantia de disponibilidade.
+
 ## Ainda depende de validação externa
 
 - Firmware ESP32, `diagram.json`, bibliotecas e instruções completos em `firmware/arcadeos/` e `docs/WOKWI.md`.
-- Duas tentativas de compilação online foram feitas. Os servidores gratuitos do Wokwi retornaram “Build Servers Busy”; a validação de compilação foi concluída localmente.
-- O circuito configurado está aberto no Wokwi, mas precisa de login para ser salvo na conta do grupo.
-- A leitura originada pelo próprio Wokwi ainda não chegou ao banco porque a simulação online não iniciou durante a indisponibilidade dos servidores.
-- TLS remoto e caminho do gateway privado não foram testados; a integração validada usa loopback local.
+- A primeira compilação no site retornou “Build Servers Busy”; a segunda ainda aguardava compilação ao encerrar aquele ensaio. A simulação foi depois validada no VS Code, conforme acima.
+- O projeto do site não foi salvo na conta; a versão funcional está na pasta local para uso no VS Code.
+- TLS remoto e caminho do gateway privado não foram testados; a simulação validada usa o broker público.
 - ESP32 físico não conectado nem testado.
 - GitHub: publicação ainda não realizada; depende da conta/repositório do grupo.
 - Docker Compose fornecido como alternativa, mas não executado; Docker Desktop não está instalado neste ambiente.
-- Não foi realizada uma bateria de testes de interação no navegador. A compilação e as respostas HTTP não substituem um ensaio visual em desktop/celular.
+- Dashboard inspecionado no navegador com leitura do Wokwi e estado crítico; ainda não foi realizada uma bateria completa de testes em desktop/celular.
 
 ## Limitações conscientes da etapa
 
